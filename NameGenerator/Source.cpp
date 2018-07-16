@@ -1,45 +1,23 @@
 #include <iostream>
-#include <fstream>
-#include <string>
-using namespace std;
+#include <ctime>
+
+#include "File.h"
 
 int main()
 {
-	string line;
-	ifstream myFile;
-	string finalName;
+	srand(static_cast<unsigned int>(time(0)));
+	std::string finalName;
 
-	int num;
-	cout << "What line?\n";
-	cin >> num;
+	File Prefix("Prefix.txt");
+	File Suffix("Suffix.txt");
 
-	myFile.open("Prefix.txt");
-	if (myFile.is_open())
-	{
-		for(int i = 0; i < num; i++)
-		{
-			getline(myFile, line);
-		}
-		finalName = line;
-		myFile.close();
-	}
+	Prefix.GetRand();
+	Suffix.GetRand();
 
-	int num2;
-	cout << "What line?\n";
-	cin >> num2;
+	finalName = Prefix.GetRand() + Suffix.GetRand();
 
-	myFile.open("Suffix.txt");
-	if (myFile.is_open())
-	{
-		for (int i = 0; i < num2; i++)
-		{
-			getline(myFile, line);
-		}
-		finalName += line;
-		myFile.close();
-	}
-
-	cout << finalName << endl;
+	//PRINT FINAL NAME
+	std::cout << finalName << std::endl;
 
 	return 0;
 }
